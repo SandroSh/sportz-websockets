@@ -71,6 +71,10 @@ commentaryRouter.post("/", async (req, res) => {
         ...bodyResult.data,
       })
       .returning();
+      
+    if(res.app.broadcastCommentary){
+      res.app.locals.broadcastCommentary(event.matchId, event)
+    }
 
     return res.status(201).json({ data: event });
   } catch (error) {
